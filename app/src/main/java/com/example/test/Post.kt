@@ -8,4 +8,6 @@ data class Post(
     val postCaption: String,
     val postType: String,
     val likeCount: Int,
-    val commentsCount: Int )
+    val commentsCount: Int,
+    val comments : List<String>
+    )

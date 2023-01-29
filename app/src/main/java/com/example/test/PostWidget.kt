@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,12 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 @Composable
-fun PostWidget(post: Post) {
+fun PostWidget(post: Post, navController: NavController ) {
     Surface() {
         Column(modifier = Modifier.fillMaxWidth()) {
 
@@ -135,7 +134,10 @@ fun PostWidget(post: Post) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(
-                        onClick = { /*TODO*/ },
+
+                        onClick = {
+                            val comments = post.comments.toString().replace("[","").replace("]","").toString()
+                            navController.navigate("commentList/${comments}") } ,
                         Modifier.size(20.dp)
                     ) {
                         Icon(
@@ -171,23 +173,23 @@ fun PostWidget(post: Post) {
     }
 }
 
-@Preview
-@Composable
-fun MyPreview() {
-    PostWidget(
-        post = Post(
-            user = User(
-                name = "Badal",
-                pic = painterResource(id = R.drawable.profile1)
-            ),
-            postPic = listOf(
-                painterResource(id = R.drawable.post1),
-                painterResource(id = R.drawable.flower2)
-            ),
-            postType = "Marketing",
-            postCaption = "It is very beautiful",
-            likeCount = 189,
-            commentsCount = 599
-        )
-    )
-}
+//@Preview
+//@Composable
+//fun MyPreview() {
+//    PostWidget(
+//        post = Post(
+//            user = User(
+//                name = "Badal",
+//                pic = painterResource(id = R.drawable.profile1)
+//            ),
+//            postPic = listOf(
+//                painterResource(id = R.drawable.post1),
+//                painterResource(id = R.drawable.flower2)
+//            ),
+//            postType = "Marketing",
+//            postCaption = "It is very beautiful",
+//            likeCount = 189,
+//            commentsCount = 599
+//        ),
+//    )
+//}
